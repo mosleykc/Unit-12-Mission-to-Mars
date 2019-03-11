@@ -35,11 +35,11 @@ soup = bs(html,"lxml")
 
 # use BeautifulSoup method to look in soup object created in previous cell and  grab all data under the div class content_title 
 # and assign to var news_article_title as text, assign output to mars var
-mars[news_article_title] = soup.find("div", class_="content_title").text
+scrape_mars_data[news_article_title] = soup.find("div", class_="content_title").text
 
 # use BeautifulSoup method to look in soup object grab all data under the div class 
 # article_teaser_body nd assign to mars var 
-mars[article_teaser] = soup.find("div", class_="article_teaser_body").text
+scrape_mars_data[article_teaser] = soup.find("div", class_="article_teaser_body").text
 
 # close the browser
 #browser.quit()
@@ -75,7 +75,7 @@ partial_featured_image =find_featured_image.replace("background-image: url('",""
 # now that the extra content has been removed, concatenate the partial image URL with the main home home page URL
 
 home_pg_url = "https://www.jpl.nasa.gov"
-mars[featured_image_url] = home_pg_url + partial_featured_image
+scrape_mars_data[featured_image_url] = home_pg_url + partial_featured_image
 
 # close the browser
 #browser.quit()
@@ -99,7 +99,7 @@ html = browser.html
 soup = bs(html,"lxml")
 
 # use the soup object to find the p with class tweet-text
-mars[mars_weather]=soup.find("p", class_="tweet-text").text
+scrape_mars_data[mars_weather]=soup.find("p", class_="tweet-text").text
 
 # close the browser
 #browser.quit()
@@ -127,7 +127,7 @@ factsHtmlTable=factsTable_df.to_html()
 #factsHtmlTable
 
 # cleanup the table by removing the next line tag
-mars[factsHtmlTable] = factsHtmlTable.replace("\n","")
+scrape_mars_data[factsHtmlTable] = factsHtmlTable.replace("\n","")
 
 # close the browser
 #browser.quit()
@@ -195,10 +195,10 @@ for h in hemispheres:
         "image_url " : full_res_image_url
         })
     # assign hemisphere_image_urls output to var mars
-    mars["hemisphere_image_urls"] = hemisphere_image_urls
+    scrape_mars_data["hemisphere_image_urls"] = hemisphere_image_urls
  
 # close the browser
 #browser.quit()
 
 # return result
-return mars
+return scrape_mars_data
